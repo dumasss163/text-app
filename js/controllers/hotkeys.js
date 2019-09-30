@@ -12,8 +12,14 @@ function HotkeysController(windowController, tabs, editor, settings, analytics) 
   this.ZOOM_OUT_FACTOR = 8/9;
 
   $(document).keydown(this.onKeydown_.bind(this));
-  document.addEventListener('mousewheel', this.onMouseWheel_.bind(this));
 };
+
+/**
+ * Update the editor.
+ */
+HotkeysController.prototype.updateEditor = function(editor) {
+  this.editor_ = editor;
+}
 
 /**
  * Handles hotkey combination if present in keydown event.
