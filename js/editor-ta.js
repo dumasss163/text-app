@@ -19,8 +19,8 @@ function EditorTextArea(editorElement, settings) {
 }
 
 /**
- * @param {HTMLElement} textarea
  * Attaches a given textarea to the editor so it may be edited.
+ * @param {HTMLElement} textarea
  */
 EditorTextArea.prototype.attachTextArea = function(textarea) {
   const initFontSize = this.settings_.get('fontsize') + 'px';

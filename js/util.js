@@ -88,9 +88,9 @@ util.getExtension = function(fileName) {
 };
 
 /**
+ * Returns guessed line endings or LF if not successful.
  * @param {?string} [text] Text content.
  * @return {string} Line endings.
- * Returns guessed line endings or LF if not successful.
  */
 util.guessLineEndings = function(text) {
   if (!text) {
@@ -103,9 +103,9 @@ util.guessLineEndings = function(text) {
 };
 
 /**
+ * Creates a unified session that can be read from any supported editor.
  * @param {?string} opt_content Optional content.
  * @return {SessionDescriptor}
- * Creates a unified session that can be read from any supported editor.
  */
 util.createUnifiedSession = function(opt_content) {
   const textarea = document.createElement('textarea');
@@ -118,9 +118,6 @@ util.createUnifiedSession = function(opt_content) {
 }
 
 /**
- * @param {SessionDescriptor} session
- * @param {string} updated Which text source is the source of truth.
- * @param {string} lineEndings What to use as a line ending
  * Syncs the multiple formats of a unified session. If one format of the session
  * such as the codemirror instance generates a change, it's registered here and
  * copied over to the other formats (such as textarea) so all of the formats
@@ -128,6 +125,9 @@ util.createUnifiedSession = function(opt_content) {
  * any text. This does cause the other editer to lose it's undo/redo stack,
  * textarea loses all history whereas codemirror tries and interpert each
  * changed character as a single edit, which blows the undo stack out.
+ * @param {SessionDescriptor} session
+ * @param {string} updated Which text source is the source of truth.
+ * @param {string} lineEndings What to use as a line ending
  */
 util.syncUnifiedSession = function(session, updated, lineEndings) {
   // TODO: Update this so that updating 1 editor syncs to the other editors in a

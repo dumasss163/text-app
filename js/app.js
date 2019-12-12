@@ -23,7 +23,7 @@ function TextApp() {
 TextApp.prototype.init = function() {
   this.settings_ = new Settings();
   this.analytics_ = new Analytics();
-  // Editor is initalised after settings are ready.
+  // Editor is initialized after settings are ready.
   this.editor_ = null;
 
   if (this.settings_.isReady()) {
@@ -96,17 +96,18 @@ TextApp.prototype.onSettingsReady_ = function() {
   this.analytics_.reportSettings(this.settings_);
   this.windowController_.setAlwaysOnTop(this.settings_.get('alwaysontop'));
 
-  chrome.runtime.getBackgroundPage(function(bg) {
+  chrome.runtime.getBackgroundPage((bg) => {
     bg.background.onWindowReady(this);
-  }.bind(this));
+  });
 };
 
 /**
  * Create all of the controllers the editor needs.
  */
 TextApp.prototype.initControllers_ = function() {
+  const dialogContainer = document.getElementById('dialog-container');
   this.dialogController_ = new DialogController(
-    $('#dialog-container'), this.editor_);
+    dialogContainer, this.editor_);
   this.tabs_ = new Tabs(this.editor_, this.dialogController_, this.settings_);
   this.menuController_ = new MenuController(this.tabs_);
   this.windowController_ = new WindowController(
@@ -115,6 +116,7 @@ TextApp.prototype.initControllers_ = function() {
       this.tabs_, this.editor_, this.settings_, this.analytics_);
   this.searchController_ = new SearchController(this.editor_.getSearch());
 }
+
 /**
  * Ensures all controllers are notified of a new editor instance.
  */
